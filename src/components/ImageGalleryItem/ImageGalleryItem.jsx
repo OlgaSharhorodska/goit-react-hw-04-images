@@ -1,57 +1,43 @@
-import { Component } from 'react';
+import React, { useState } from 'react';
 import css from './ImageGalleryItem.module.css';
 import { Modal } from 'components/Modal/Modal';
 
-export class ImageGalleryItemImage extends Component {
-  state = {
-    modalActiv: false,
-    imgId: '',
+export const ImageGalleryItem = ({ unit }) => {
+  const [modalActive, setModalActive] = useState(false);
+  const [imgId, setImgId] = useState('');
+
+  const imgClick = () => {
+    setModalActive(true);
+    setImgId(unit.largeImageURL);
   };
 
-  imgClick = () => {
-    const { unit } = this.props;
-    this.setState({
-      modalActiv: true,
-      imgId: unit.largeImageURL,
-    });
-  };
-
-  closeModal = e => {
+  const closeModal = e => {
     if (e.target === e.currentTarget) {
-      this.setState({
-        modalActiv: false,
-      });
+      setModalActive(false);
     }
   };
 
-  keyCloseModal = () => {
-    this.setState({
-      modalActiv: false,
-    });
+  const keyCloseModal = () => {
+    setModalActive(false);
   };
 
-  render() {
-    const { unit } = this.props;
-    const { modalActiv } = this.state;
-
-    return (
-      <>
-        <img
-          id={unit.id}
-          src={unit.webformatURL}
+  return (
+    <>
+      <img
+        id={unit.id}
+        src={unit.webformatURL}
+        alt={unit.tags}
+        className={css.imageGalleryItemImage}
+        onClick={imgClick}
+      />
+      {modalActive && (
+        <Modal
+          img={imgId}
           alt={unit.tags}
-          className={css.imageGalleryItemImage}
-          onClick={this.imgClick}
+          overlayClick={closeModal}
+          keyClose={keyCloseModal}
         />
-        {modalActiv && (
-          <Modal
-            img={this.state.imgId}
-            alt={unit.tags}
-            overlayClick={this.closeModal}
-            keyClose={this.keyCloseModal}
-          />
-        )}
-      </>
-    );
-  }
-}
+      )}
+    </>
+  );
+};

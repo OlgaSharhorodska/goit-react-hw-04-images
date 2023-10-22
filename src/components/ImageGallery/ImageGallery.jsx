@@ -1,4 +1,4 @@
-import { ImageGalleryItemImage } from 'components/ImageGalleryItem/ImageGalleryItem';
+import { ImageGalleryItem } from '../ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
 
 export const ImageGallery = ({ units }) => {
@@ -8,7 +8,7 @@ export const ImageGallery = ({ units }) => {
         units.map(unit => {
           return (
             <li key={unit.id} className={css.imageGalleryItem}>
-              <ImageGalleryItemImage unit={unit} />
+              <ImageGalleryItem unit={unit} />
             </li>
           );
         })}
