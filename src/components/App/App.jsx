@@ -6,7 +6,7 @@ import { ImageGallery } from '../ImageGallery/ImageGallery';
 import { Searchbar } from '../Searchbar/Searchbar';
 import { Loader } from '../Loader/Loader';
 import { Button } from '../Button/Button';
-import { getFetch } from '../js/api';
+import { getFetch } from '../js/api'
 
 export const App = () => {
   const [name, setName] = useState('');
